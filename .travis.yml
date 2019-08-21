@@ -11,13 +11,13 @@ env:
 
 before_script:
   - sudo pip install shyaml
-  - docker-compose up --force --build -d
+  - docker-compose -f docker-compose.travis.yml up --force --build -d
   - docker ps
-  - docker-compose exec cli composer install
-  - docker-compose exec cli drush si -y config_installer
+  - docker-compose -f docker-compose.travis.yml exec cli composer install
+  - docker-compose -f docker-compose.travis.yml exec cli drush si -y config_installer
 
 script:
-  - docker-compose exec cli ls vendor
+  - docker-compose -f docker-compose.travis.yml exec cli ls vendor
 
 deploy:
   provider: script
