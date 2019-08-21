@@ -1,0 +1,24 @@
+services:
+ - docker
+language: php
+php:
+  - '7.2'
+git:
+  depth: false
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.24.1
+
+before_script:
+  - pip install shyaml
+  - docker-compose up --force --build -d
+  - docker ps
+  - docker-compose exec cli composer install
+  - docker-compose exec cli drush si -y config_installer
+
+script:
+  - docker-compose exec cli ls vendor
+
+deploy:
+  provider: script
+  script: bash scripts/travis/deploy.sh
