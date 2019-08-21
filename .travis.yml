@@ -14,7 +14,7 @@ before_script:
   - docker-compose -f docker-compose.travis.yml up --force --build -d
   - docker ps
   - docker-compose -f docker-compose.travis.yml exec cli composer install
-  - docker-compose -f docker-compose.travis.yml exec cli drush si -y config_installer
+  - docker-compose -f docker-compose.travis.yml exec cli drush si -y config_installer install_configure_form.enable_update_status_module=NULL install_configure_form.enable_update_status_emails=NULL
 
 script:
   - docker-compose -f docker-compose.travis.yml exec cli ls vendor
