@@ -10,7 +10,7 @@ env:
   - DOCKER_COMPOSE_VERSION=1.24.1
 
 before_script:
-  - pip install shyaml
+  - sudo pip install shyaml
   - docker-compose up --force --build -d
   - docker ps
   - docker-compose exec cli composer install
